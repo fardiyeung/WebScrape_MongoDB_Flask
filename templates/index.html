@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</head>
+
+<body>
+
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Mission To Mars</h1>
+            <p><a class="btn btn-primary btn-lg" href="/scrape" role="button">Scrape New Data</a></p>
+
+        </div>
+    </div>
+    {% for mars in marsInfo%}  
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card" >
+                    <div class="card-body">
+                            <h3 class="card-title">{{mars.news_title}}</h3>
+                            <h6 class="card-subtitle mb-2 text-muted">{{ mars.news_content }}</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-4">
+                <div class="card" >
+                <div class="card-body">
+                        <h3 class="card-title">Mars Weather</h3>
+                        <h6 class="card-subtitle mb-2 text-muted">{{ mars.mars_weather }}</h6>
+                </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card" >
+                <div class="card-body">
+                        <img class="img-responsive" src="{{mars.featured_image_url}}" alt="">
+                </div>
+                </div>
+            </div>           
+
+            <div class="col-lg-4">
+                <div class="card" >
+                    <div class="card-body">
+                        <table class="table table-condensed">
+                                <thead>
+                                  <tr>
+                                    <th>Profile Item</th>
+                                    <th>Value</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                {% for fact in mars.table%}
+
+                                  <tr>
+                                    <td>{{fact.Profile}}</td>
+                                    <td>{{ fact.Value }}</td>
+                                  </tr>
+
+                                {% endfor %} 
+                                </tbody>               
+
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+            <div class="col-lg-12">
+                    <h3> Mars Hemisphere</h3>
+            </div>
+        {% for img in mars.hemisphere_image_urls %}
+
+            <div class="col-lg-6">
+                <div class="card" >
+
+                <div class="card-body">
+                        
+                        <img class="img-responsive" src="{{img.img_url}}" alt="">
+                        <h4 class="card-title">{{img.title}}</h4>
+                </div>
+                </div>
+            </div>
+
+        
+        {% endfor %}
+    </div>    
+
+    
+    {% endfor %}
+</body>
+
+</html>
